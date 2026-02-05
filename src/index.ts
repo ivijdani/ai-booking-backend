@@ -7,6 +7,11 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 
+app.get('/api/healthz', (req, res) => {
+  res.status(200).json({ ok: true })
+})
+  
+
 // Home route - HTML
 app.get('/', (req, res) => {
   res.type('html').send(`
@@ -22,7 +27,7 @@ app.get('/', (req, res) => {
           <a href="/">Home</a>
           <a href="/about">About</a>
           <a href="/api-data">API Data</a>
-          <a href="/healthz">Health</a>
+          <a href="/api/healthz">Health</a>
         </nav>
         <h1>Welcome to Express on Vercel 🚀</h1>
         <p>This is a minimal example without a database or forms.</p>
