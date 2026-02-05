@@ -54,4 +54,24 @@ app.get('/healthz', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
+app.post('/api/calendly/book', express.json(), async (req, res) => {
+  try {
+    const { name, email } = req.body || {}
+
+    if (!name || !email) {
+      return res.status(400).json({ ok: false, error: "Missing name or email" })
+    }
+
+    // For now, just prove Retell can reach the endpoint.
+    // We'll add the Calendly API call in the next step.
+    return res.status(200).json({
+      ok: true,
+      received: { name, email }
+    })
+  } catch (err: any) {
+    return res.status(500).json({ ok: false, error: err?.message || "Server error" })
+  }
+})
+
+
 export default app
